@@ -1,0 +1,230 @@
+MTM101BaldAPI documentation since it is an xml file
+
+** Localization **
+M:MTM101BaldAPI.AssetTools.AssetLoader.LocalizationFromFile(System.String,Language)
+	-> Adds the specified file to be queued for load for the specified langauge.
+	-> Params:
+		-> path
+		-> lang
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.LocalizationFromFunction(System.Func{Language,System.Collections.Generic.Dictionary{System.String,System.String}})
+	-> Adds the specified function to get called at the end of language loading. The returned dictionary is added to the localization.
+	
+
+M:MTM101BaldAPI.AssetTools.AssetLoader.LocalizationFromMod(BepInEx.BaseUnityPlugin)
+	-> Automatically queues the appropiate localization file from the specified mod. Use this if you are porting a mod from a version before 6.0.0.0 (AKA: Put JSON files in Language/English/)
+	
+** Model loading **	
+M:MTM101BaldAPI.AssetTools.AssetLoader.ModelFromFile(System.String)
+	-> Loads a .obj and .mtl from the specified file.
+	-> Returns:
+		-> The GameObject containing the model
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.ModelFromFileManualMaterials(System.String,System.Collections.Generic.Dictionary{System.String,UnityEngine.Material})
+	-> Loads an .obj file with the manually specified materials
+	-> Returns:
+		-> The GameObject containing the model
+		
+** Texture loading **
+M:MTM101BaldAPI.AssetTools.AssetLoader.TexturesFromFolder(System.String,System.String)
+	-> Load textures from a specified folder.
+	-> Params:
+		-> path
+		-> search
+	-> Returns:
+		-> The array of textures created using the images found.
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.MakeReadableCopy(UnityEngine.Texture2D,System.Boolean)
+	-> Makes a readable copy of the specified Texture2D
+	-> Params:
+		-> source
+		-> apply (If the changed texture should be uploaded to the GPU.)
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.TexturesFromMod(BepInEx.BaseUnityPlugin,System.String,System.String[])
+	-> Gets textures from a specified folder, starting from the mod's StreamingAssets path.
+	-> Params:
+		-> plugin
+		-> search
+		-> paths
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.ToSprites(UnityEngine.Texture2D[],System.Single)
+	-> Convert an array of texture into sprites
+	-> Params:
+		-> textures
+		-> pixelsPerUnit
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.TextureFromFile(System.String)
+	-> Load a texture from a file.
+	-> Params:
+		-> path
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.TextureFromFile(System.String,UnityEngine.TextureFormat)
+	-> Load a texture from a file with the specified format.
+	-> Params:
+		-> path
+		-> format
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.ReplaceTexture(UnityEngine.Texture2D,UnityEngine.Texture2D)
+	-> Replace the image data of one texture with another. They must be the exact same size.
+	-> Params:
+		-> toReplace (The texture to override the texture of.)
+		-> replacement (The replacement texture.)
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.ReplaceTexture(System.String,UnityEngine.Texture2D)
+	-> Find a texture with the specified name and replace it's image data with the data of replacement.
+	-> Params:
+		-> toReplace
+		-> replacement
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.AttemptConvertTo(UnityEngine.Texture2D,UnityEngine.TextureFormat)
+	-> Attempt to convert a texture to another format, deleting the original.
+	-> Params:
+		-> toConvert
+		-> format
+	-> Returns:
+		-> The texture converted to the new format.
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.ReplaceAllTexturesFromFolder(System.String)
+	-> Go through a folder and replace the image data of all textures sharing the same name of the png file.
+	-> Params:
+		-> path
+		
+** Audio loading **
+M:MTM101BaldAPI.AssetTools.AssetLoader.AudioClipFromFile(System.String)
+	-> Load an audio clip from a file.
+	-> Params:
+		-> path
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.AudioClipFromFile(System.String,UnityEngine.AudioType)
+	-> Load an audio clip from a file with the specified AudioType.
+	-> Params:
+		-> path
+		-> type
+	-> Exceptions:
+		-> T:System.Exception
+		
+** More sprite loading **
+M:MTM101BaldAPI.AssetTools.AssetLoader.SpriteFromTexture2D(UnityEngine.Texture2D,System.Single)
+	-> Create a sprite from a Texture2D with the origin of the image being the center.
+	-> Params:
+		-> tex (The texture to use.)
+		-> pixelsPerUnit (The pixels per unit, a hallway in BB+ is 10 units.)
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.SpritesFromSpritesheet(System.Int32,System.Int32,System.Single,UnityEngine.Vector2,UnityEngine.Texture2D)
+	-> Generates sprites from the specified spritesheet.
+	-> Params:
+		-> horizontalTiles (How many tiles this spritesheet has horizontally.)
+		-> verticalTiles (How many tiles this spritesheet has vertically.)
+		-> pixelsPerUnit (The pixels per unit for the created sprites.)
+		-> center (The center for the created sprites.)
+		-> tex (The texture to use.)
+	-> Returns:
+		-> The collection of sprites.
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.SpritesFromSpritesheet2D(System.Int32,System.Int32,System.Single,UnityEngine.Vector2,UnityEngine.Texture2D)
+	-> Generates sprites from the specified spritesheet.
+	-> Params:
+		-> horizontalTiles (How many tiles this spritesheet has horizontally.)
+		-> verticalTiles (How many tiles this spritesheet has vertically.)
+		-> pixelsPerUnit (The pixels per unit for the created sprites.)
+		-> center (The center for the created sprites.)
+		-> tex (The texture to use.)
+	-> Returns:
+		-> The collection of sprites as a 2D array
+		
+** Stream to byte array **
+M:MTM101BaldAPI.AssetTools.AssetLoader.ToByteArray(System.IO.Stream)
+	-> Convert a stream to a byte array.
+	-> Params:
+		-> stream
+	-> Exceptions:
+		-> T:System.InvalidOperationException
+		
+** Even more sprite loading **
+M:MTM101BaldAPI.AssetTools.AssetLoader.SpriteFromTexture2D(UnityEngine.Texture2D,UnityEngine.Vector2,System.Single)
+	-> Create a sprite from a Texture2D.
+	-> Params:
+		-> tex (The texture to use.)
+		-> center (The center of the sprite, where 0,0 is the top left and 1,1 is the bottom right.)
+		-> pixelsPerUnit (The pixels per unit, a hallway in BB+ is 10 units.)
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.SpriteFromFile(System.String,UnityEngine.Vector2,System.Single)
+	-> Creates a sprite from the specified file path.
+	-> Params:
+		-> plug (The mod to load the sprite from)
+		-> paths (The additional paths to load)
+		-> pixelsPerUnit (The pixels per unit, a hallway in BB+ is 10 units.)
+		-> center (The center of the sprite, where 0,0 is the top left and 1,1 is the bottom right.)
+		
+** Localization 2 **
+M:MTM101BaldAPI.AssetTools.AssetLoader.LoadLocalizationFolder(System.String,Language)
+	-> Queues all the files in the specified localization folder to be loaded.
+	-> Params:
+		-> rootPath
+		-> lang
+		
+** MISC **
+M:MTM101BaldAPI.AssetTools.AssetLoader.TextureFromMod(BepInEx.BaseUnityPlugin,System.String[])
+	-> Load a Texture2D from the specified path, starting from the specified mod's mod path.
+	-> Params:
+		-> plug
+		-> paths
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.AudioClipFromMod(BepInEx.BaseUnityPlugin,System.String[])
+	-> Load an Audioclip from the specified path, starting from the specified mod's mod path.
+	-> Params:
+		-> plug
+		-> paths
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.GetModPath(BepInEx.BaseUnityPlugin)
+	-> Get a mod's mod path. (Currently StreamingAssets/Modded/[MOD GUID])
+	-> Params:
+		-> plug
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.MidiFromFile(System.String,System.String)
+	-> Loads a midi file with the specified path.
+	-> Params:
+		-> path (The filepath of the midi.)
+		-> id (The ID of the midi, used as a starting point for creating the return value.)
+	-> Returns:
+		-> The string that can be used in the midi player to play the midi.
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.UnloadCustomMidi(System.String)
+	-> Unloads the specified custom midi of the specified ID. This CANNOT unload vanilla midis.
+	-> Params:
+		-> id
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.MidiFromMod(System.String,BepInEx.BaseUnityPlugin,System.String[])
+	-> Loads a midi file with the specified path starting from the mod path.
+	-> Params:
+		-> id (The ID of the midi, used as a starting point for creating the return value.)
+		-> plug (The modpath to get.)
+		-> paths (The folders to go through starting from the modpath.)
+	-> Returns:
+		-> The string that can be used in the midi player to play the midi.
+		
+** More texture things **
+M:MTM101BaldAPI.AssetTools.AssetLoader.FlipX(UnityEngine.Texture2D,System.Boolean)
+	-> Flips the specified Texture2D horizontally.
+	-> Params:
+		-> source
+		-> apply (If the changed texture should be uploaded to the GPU.)
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.FlipY(UnityEngine.Texture2D,System.Boolean)
+	-> Flips the specified Texture2D vertically.
+	-> Params:
+		-> source
+		-> apply (If the changed texture should be uploaded to the GPU.)
+		
+M:MTM101BaldAPI.AssetTools.AssetLoader.Rotate180(UnityEngine.Texture2D,System.Boolean)
+	-> Rotate specified Texture2D by 180 degrees (flip both horizontally and vertically).
+	-> Params:
+		-> source
+		-> apply (If the changed texture should be uploaded to the GPU.)
+		
+** Cubemap things **
+M:MTM101BaldAPI.AssetTools.AssetLoader.CubemapFromMod(BepInEx.BaseUnityPlugin,System.String[])
+	-> Creates a cubemap from a texture in the specified path, starting from the mod path.
+	-> Params:
+		-> plugin
+		-> paths
