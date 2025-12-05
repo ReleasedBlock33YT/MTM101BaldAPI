@@ -228,3 +228,161 @@ M:MTM101BaldAPI.AssetTools.AssetLoader.CubemapFromMod(BepInEx.BaseUnityPlugin,Sy
 	-> Params:
 		-> plugin
 		-> paths
+
+M:MTM101BaldAPI.AssetTools.AssetLoader.CubemapFromFile(System.String)
+	-> Creates a cubemap from a texture in the specified path.
+	-> Params:
+		-> path
+
+M:MTM101BaldAPI.AssetTools.AssetLoader.CubemapFromTexture(UnityEngine.Texture2D)
+	-> Create a cubemap from a Texture2D.
+	-> Params:
+		-> texture
+
+m:MTM101BaldAPI.AssetTools.AssetLoader.TextureFromCubemap(UnityEngine.Cubemap)
+	-> Unwraps a cubemap and outputs it as a decompressed Texture2D.
+	-> Params:
+		-> cubemap
+
+** Asset Manager **
+T:MTM101BaldAPI.AssetTools.AssetManager
+	-> This class provides an (optional) easy and convient way to store mass amounts of asset references. This is useful for storing textures, SoundObjects, NPC references, and more. This class is not meant to be the end all be all of storing and managing assets. However, this is a good starting point for most mods.
+
+M:MTM101BaldAPI.AssetTools.AssetManager.GetUniqueCount
+	-> Get the amount of unique elements in the AssetManager.
+
+M:MTM101BaldAPI.AssetTools.AssetManager.#ctor(System.Type[])
+	-> Create an AssetManager with a custom set of types to be ignored. It is suggested you also add the types in AssetManager.defaultIgnoreTypes
+	-> Params:
+		-> ignoreTypes
+
+M:MTM101BaldAPI.AssetTools.AssetManager.#ctor
+	-> Create an AssetManager with the default types ignored.
+
+M:MTM101BaldAPI.AssetTools.ClearAll''1
+	-> Remove all objects of type T from the AssetManager.
+	-> TYPEPARAMS:
+		-> T
+		* What is TYPEPARAMS anyways? - Will add in QNA.txt later *
+
+M:MTM101BaldAPI.AssetTools.AssetManager.AddRange''1(''0[],System.Func{''0,System.String})
+	-> Add a range of elements to the AssetManager, using the keyFunc to determine the keys.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> range
+		-> keyFunc
+
+M:MTM101BaldAPI.AssetTools.AssetManger.AddFromResources''1
+	-> Add all resources of the specified type to the AssetManager, using the name as the key.
+	-> TYPEPARAMS:
+		-> T
+
+M:MTM101BaldAPI.AssetTools.AssetManager.ContainsKey(System.String)
+	-> Check if the asset manager contains the specified key.
+	-> Params:
+		-> key
+
+M:MTM101BaldAPI.AssetTools.AssetManager.AddRange''1(''0[])
+	-> Add a range of values to the AssetManger, using the .name of the object as the key.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> range
+
+M:MTM101BaldAPI.AssetTools.AssetManager.AddRange``1(System.Collections.Generic.Dictionary{``0,System.String},System.String)
+	-> Add a range of values to the AssetManager using a dictionary of object key pairs, with an optional perfix.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> range
+		-> prefix
+
+M:MTM101BaldAPI.AssetTools.AssetManager.AddRange''1(''0[],System.String[])
+	-> Add a range of values to the AssetManager using an object array and a key array.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> range
+		-> keys
+
+M:MTM101BaldAPI.AssetTools.AssetManager.AddRange''1(System.Collections.Generic.Dictionary{System.String,''0})
+	-> Add a range of values to the AssetManager using a dictionary of object key pairs.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> range
+
+** ProceduralTextureBuilder **
+T:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder
+	-> A builder for procedural textures, AKA textures generated with other textures.
+	   **This is slow! Please avoid using this for real time applications, preferably use when loading your mod!**
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.GetAllTexturesWithTag(System.String)
+	-> Gets all currently stored textures with the specified tag.
+	   **Do not use this to get your finished textures! Use ExportAll for that!**
+	-> PARAMS:
+		-> tag
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.Clip(System.String,UnityEngine.Texture2D,System.String)
+	-> Clip the texture using all textures in the tag as masks, and put the resulting textures into the specified tag.
+	-> PARAMS:
+		-> tag
+		-> toClip
+		-> resultTag
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.SplitViaColor(UnityEngine.Texture2D,System.String)
+	-> Splits the specified texture into multiple textures via color, and puts all the resulting textures into the specified tag.
+	   **Only use this in specially designed images with few colors!**
+	-> PARAMS:
+		-> toSplit
+		-> tag
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.Trim(System.String,System.String)
+	-> Trims all the textures so that their bounds are only where there are visible pixels.
+	-> PARAMS:
+		-> tag
+		-> resultTag
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.CustomActionWithAll(System.String,System.Action{MTM101BaldAPI.AssetTools.ProceduralTextureBuilder,UnityEngine.Texture2D})
+	-> Perform a custom texture action on all textures with the specified tag. Be sure to delete any textures you create that you dont add to the ProceduralTextureBuilder!
+	-> PARAMS:
+		-> tag
+		-> customAction
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.ExportAll(System.String)
+	-> Export all textures with the specified tag, destroying all other textures.
+	-> PARAMS:
+		-> tag
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.LoadTexture(UnityEngine.Texture2D,System.String)
+	-> Loads a texture into the procedural texture builder with the specified tag.
+	-> PARAMS:
+		-> tex
+		-> tag
+
+M:MTM101BaldAPI.AssetTools.ProceduralTextureBuilder.FlipAllHorizontal(System.String,System.String)
+	-> Flips all textures with the specified tag horizontally, storing the results into the resulting tag.
+	-> PARAMS:
+		-> tag
+		-> resultTag
+
+** Sprite Sheets **
+M:MTM101BaldAPI.AssetTools.SpriteSheets.SpriteSheetLoader.LoadAsepriteAnimationsFromFile(System.String,System.Single,UnityEngine.Vector2)
+	-> Loads an Aesprite JSON file from the specified file path.
+	-> PARAMS:
+		-> path
+		-> pixelsPerUnit
+		-> pivot
+
+M:MTM101BaldAPI.AssetTools.SpriteSheets.SpriteSheetLoader.LoadAsepriteAnimationsFromMod(BepInEx.BaseUnityPlugin,System.Single,UnityEngine.Vector2,System.String[])
+	-> Loads an Aesprite JSON file from the specified mod path.
+	-> PARAMS:
+		-> plugin
+		-> pixelsPerUnit
+		-> pivot
+		-> paths
+
+** Patch **
+M:MTM101BaldAPI.HarmonyExtensions.PatchAllConditionals(HarmonyLib.Harmony,System.Reflection.Assembly,System.Boolean)
+	-> Patches all conditional patches with the specified assembly
