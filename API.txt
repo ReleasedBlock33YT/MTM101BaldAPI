@@ -1,4 +1,4 @@
-MTM101BaldAPI documentation since it is an xml file
+**Unoffical** MTM101BaldAPI documentation since it is an xml file
 
 ** Localization **
 M:MTM101BaldAPI.AssetTools.AssetLoader.LocalizationFromFile(System.String,Language)
@@ -386,3 +386,124 @@ M:MTM101BaldAPI.AssetTools.SpriteSheets.SpriteSheetLoader.LoadAsepriteAnimations
 ** Patch **
 M:MTM101BaldAPI.HarmonyExtensions.PatchAllConditionals(HarmonyLib.Harmony,System.Reflection.Assembly,System.Boolean)
 	-> Patches all conditional patches with the specified assembly
+
+M:MTM101BaldAPI.HarmonyExtensions.PatchAllConditionals(HarmonyLib.Harmony)
+	-> Patches all conditional patches in the current assembly. A direct replacement for PatchAll.
+	-> PARAMS:
+		-> _harmony
+
+T:MTM101BaldAPI.ConditionalPatch
+	-> Base class for ConditionalPatches.
+
+T:MTM101BaldAPI.ConditionalPatchAlways
+	-> Always patches, same as not having a ConditionalPatch at all.
+
+T:MTM101BaldAPI.ConditionalPatchConfig
+	-> Patches if the specified config is true.
+
+T:MTM101BaldAPI.ConditionalPatchNever
+	-> Never patches
+
+T:MTM101BaldAPI.ConditionalPatchMod
+	-> Patch if the specified mod is installed.
+
+T:MTM101BaldAPI.ConditionalPatchNoMod
+	-> Patch if the specified mod is not installed.
+
+** Developer API **
+P:MTM101BaldAPI.MTM101BaldiDevAPI.Version
+	-> The version of the API, applicable when BepInEx cache messes up the version number.
+
+F:MTM101BaldAPI.MTM101BaldiDevAPI.PrefabSubObject
+	-> The internal subobject used for converting objects into prefabs. Use this with GameObject.Instantiate as the parent transform to avoid manually having to clean stuff up.
+
+P:MTM101BaldAPI.MTM101BaldiDevAPI.prefabTransform
+	-> The internal transform used for converting objects into prefabs. Use this with GameObject.Instantiate to prevent awake scripts from activating.
+
+M:MTM101BaldAPI.MTM101BaldiDevAPI.CauseCrash(BepInEx.PluginInfo,System.Exception)
+	-> Please only use this function for actual errors.
+	-> PARAMS:
+		-> plug
+		-> e
+
+** COMPONENTS **
+T:MTM101BaldAPI.Components.CullAffector
+	-> GameObjects with this behavior makes the culling manager treat it as if it were a player. Useful if you have are using cameras that aren't the players'. Note that performance may take a hit if you use this, so use it with caution! (Maybe if the player isn't looking you could remove the component?)
+
+M:MTM101BaldAPI.Components.CustomAnimation'1.#ctor(System.Int32,'0[])
+	-> Create an animation with the specified FPS
+	-> PARAMS:
+		-> fps
+		-> frames
+
+M:MTM101BaldAPI.Components.CustomAnimation'1.#ctor('0[],System.Single)
+	-> Create an animation that is totalTime long.
+	-> PARAMS:
+		-> frames
+		-> totalTime
+
+T:MTM101BaldAPI.Components.CustomAnimatorMono'3
+	-> A base for a monobehavior implementation of ICustomAnimatior, including setting a default animation
+	-> TYPEPARAMS:
+		-> TType
+		-> TAnimation
+		-> TFrame
+
+F:MTM101BaldAPI.Components.CustomAnimator'3.useUnscaledTime
+	-> Determines if this CustomAnimator should be affected by timescale.
+
+M:MTM101BaldAPI.Components.CustomAnimatorMono'3.PopulateAnimations(System.Collections.Generic.Dictionary{System.String,`2[]},System.Int32)
+	-> Populate the animations directory with a dictionary of keys and frame arrays with the specified FPS.
+	-> PARAMS:
+		-> animations
+		-> fps
+
+T:MTM101BaldAPI.Components.CustomSpriteAnimator
+	-> A custom animator for sprites. Note that the animations do not serialize, so initialize them in the entities Initialize function.
+
+T:MTM101BaldAPI.Components.CustomImageAnimator
+	-> A custom animator for images. Note that the animations do not serialize, so initalize them in the entities Initialize function.
+
+F:MTM101BaldAPI.Components.CustomVolumeAnimator.sensitivity
+	-> An optional animation curve to control the sensitivity.
+
+T:MTM101BaldAPI.Components.RotatedSpriteAnimator
+	-> A custom animator for entities with rotaing sprites. EX: First-Prize and Dr. Reflex
+
+** Custom Level Object(s) **
+T:MTM101BaldAPI.CustomLevelObject
+	-> A custom version of the LevelObject class, currently doesn't contain much else but it serves as a good base to make extending level generator functionality easy in the future.
+
+M:MTM101BaldAPI.CustomLevelObject.MakeClone
+	-> Makes a clone of this CustomLevelObject, preserving the custom mod data.
+
+M:MTM101BaldAPI.CustomLevelObject.SetCustomModValue(BepInEx.PluginInfo,System.String,System.Object)
+	-> Adds the specified key/value to the CustomLevelObject, allowing for storing extra, mod specific generator settings.
+	-> PARAMS:
+		-> pluginInfo
+		-> key
+		-> value
+
+** Enum Extensions **
+M:MTM101BaldAPI.EnumExtensions.ToStringExtended''1(''0)
+	-> ToString but for Extended enums. Only use on enums that are ints.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> en
+
+M:MTM101BaldAPI.EnumExtensions.ExtendEnum''1(System.String)
+	-> Extends an enum, same effect could be achieved by casting an int, however this has a system to keep track of multiple enum additions from different mods to prevent conflicts
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> val
+
+M:MTM101BaldAPI.EnumExtensions.GetExtendedName''1(System.Int32)
+	-> Enum.GetName but with support for extended enums.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> name
+	-> EXCEPTIONS:
+		-> T:System.Collections.Generic.KeyNotFoundException
