@@ -507,3 +507,77 @@ M:MTM101BaldAPI.EnumExtensions.GetExtendedName''1(System.Int32)
 		-> name
 	-> EXCEPTIONS:
 		-> T:System.Collections.Generic.KeyNotFoundException
+
+M:MTM101BaldAPI.EnumExtensions.GetFromExtendedName''1(System.String)
+	-> Get an extended enum from a name.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> name
+	-> EXCEPTIONS:
+		-> T:System.Collections.Generic.KeyNotFoundException
+
+** Extensions (not EnumExtensions) **
+M:MTM101BaldAPI.Extensions.ConvertToPrefab(UnityEngine.GameObject,System.Boolean)
+	-> Convert the GameObject into a prefab by moving its transform inside an internal GameObject marked as HideAndDontSave. It is automatically done for NPCs made with NPCBuilders and Items made with ItemBuilder. Use this method in AssetsLoaded.
+	-> PARAMS:
+		-> me
+		-> setActive
+	-> EXCEPTIONS:
+		->T:System.NullReferenceException
+
+M:MTM101BaldAPI.Extensions.StopCurrentTransition(GlobalCam)
+	-> Stops the currently running transition.
+	-> PARAMS:
+		-> me
+
+M:MTM101BaldAPI.Extensions.MoveUntilDone(System.Collections.IEnumerator)
+	->Repeatedly calls MoveNext until the IEnumerator is empty
+	-> PARAMS:
+		-> numerator
+	-> RETURNS:
+		-> All the things returned by the IEnumerator
+
+M:MTM101BaldAPI.Extensions.MarkAsNeverUnload(UnityEngine.Object)
+	-> Makes an object never unload from memory.
+	-> PARAMS:
+		-> me
+
+M:MTM101BaldAPI.Extensions.RemoveUnloadMark(UnityEngine.Object)
+	-> Allows an object unload from memory.
+	-> PARAMS:
+		-> me
+
+M:MTM101BaldAPI.Extensions.MarkAsNeverUnload(UnityEngine.ScriptableObject)
+	-> Makes an object never unload from memory.
+	-> PARAMS:
+		-> me
+
+M:MTM101BaldAPI.Extensions.RemoveUnloadMark(UnityEngine.ScriptableObject)
+	-> Allows an object unload from memory.
+	-> PARAMS:
+		-> me
+
+M:MTM101BaldAPI.Extensions.GetCellIndexAt(RoomAsset,System.Int32,System.Int32)
+	-> Get the index of the cell at the specified position, returns -1 if there is no cell with that position.
+	-> PARAMS:
+		-> me
+		-> x
+		-> y
+	-> RETURNS:
+		-> The index in the cells array of the cell with the specific position, -1 if there is no cell in that position.
+
+M:MTM101BaldAPI.Extensions.GetCellAt(RoomAsset,System.Int32,System.Int32)
+	-> Gets the cell at the specified position, returns null if there is no cell at that position.
+	-> PARAMS:
+		-> me
+		-> x
+		-> y
+	-> RETURNS:
+		-> The cell at the specified position or null if it does not exist.
+
+M:MTM101BaldAPI.Extensions.SetMainTexture(UnityEngine.Material,UnityEngine.Texture)
+	-> Sets the main texture of the material, uses the appropiate variable names for BB+ shaders.
+	-> PARAMS:
+		-> me
+		-> texture
