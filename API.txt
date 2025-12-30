@@ -581,3 +581,30 @@ M:MTM101BaldAPI.Extensions.SetMainTexture(UnityEngine.Material,UnityEngine.Textu
 	-> PARAMS:
 		-> me
 		-> texture
+
+m:MTM101BaldAPI.Extensions.SetColor(UnityEngine.Material,UnityEngine.Color)
+	-> Sets the color of the material, uses the appropiate variable names for BB+ shaders.
+	-> PARAMS:
+		-> me
+		-> color
+
+M:MTM101BaldAPI.Extensions.SetMaskTexture(UnityEngine.Material,UnityEngine.Texture)
+	-> Sets the mask texture of the material
+	-> PARAMS:
+		-> me
+		-> texture
+
+M:MTM101BaldAPI.Extensions.ApplyDoorMaterials(StandardDoor,StandardDoorMats,UnityEngine.Material)
+	-> Applies the StandardDoorMats materials to the specified StandardDoor, optionally changing the mask.
+	-> PARAMS:
+		-> me
+		-> materials
+		-> mask
+
+** Registers **
+M:MTM101BaldAPI.Registers.MetaExtensions.ToValues''1(System.Collections.Generic.List{MTM101BaldAPI.Registers.IMetadata{``0}})
+	-> Converts metadata into a list of the metadata's values.
+	-> TYPEPARAMS:
+		-> T
+	-> PARAMS:
+		-> me
