@@ -1,5 +1,5 @@
 # MTM101BaldAPI
-Documentation on the MTM101BaldAPI
+Documentation on the MTM101BaldAPI since it doesn't really have documentation
 This is in WIP so it does not have everything covered yet.
 
 Please visit API.txt for the API file.
