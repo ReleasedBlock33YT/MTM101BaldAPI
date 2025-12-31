@@ -705,3 +705,28 @@ M:MTM101BaldAPI.Registers.NPCMetaStorage.ReplaceAllReferencesForCharacter''2(Cha
 		-> TReplace
 	-> PARAMS:
 		-> character
+
+F:MTM101BaldAPI.Registers.RandomEventFlags.CharacterSpecific
+	-> This event requires a specific character to work
+
+F:MTM101BaldAPI.Registers.RandomEventFlags.RoomSpecific
+	-> This event requires a specific room to work
+
+F:MTM101BaldAPI.Registers.RandomEventFlags.Permanent
+	-> This event makes permanent changes to the level
+
+F:MTM101BaldAPI.Registers.RandomEventFlags.AffectsGenerator
+	-> This event affects the generator in some way(adding a character or room)
+
+F:MTM101BaldAPI.Registers.RandomEventFlags.Special
+	-> This event isn't called through regular means, and shouldn't be added to the random event pool.
+
+** Legacy Object Builder Suppport **
+T:MTM101BaldAPI.LegacyObjectBuilderSupport
+	-> Add this component to your old ObjectBuilders to hopefully keep them functional for the moment. I suggest switching away from this class as soon as possible. (Untested)
+
+** Object Creation **
+M:MTM101BaldAPI.ObjectCreation.EntityBuilder.SetBaseRadius(System.Single)
+	-> Set's the base collision radius of the entity.
+	-> PARAMS:
+		-> radius
